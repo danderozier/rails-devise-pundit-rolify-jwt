@@ -3,11 +3,16 @@ Rails.application.routes.draw do
 
   root to: 'home#index'
 
-  devise_for :users,
-    :defaults => {
-      :format => :json
-    },
-    :controllers => {
-      :sessions => 'api/v1/sessions'
-    }
+  scope '/api/v1' do
+    devise_for :users,
+      :defaults => {
+        :format => :json
+      },
+      :controllers => {
+        :sessions => 'api/v1/sessions',
+        :passwords => 'api/v1/passwords',
+        :confirmations => 'api/v1/confirmations',
+        :unlocks => 'api/v1/unlocks'
+      }
+  end
 end
