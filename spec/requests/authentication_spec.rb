@@ -45,6 +45,7 @@ RSpec.describe 'DELETE /api/v1/users/sign_out', type: :request do
 
   it 'returns 204, no content' do
     delete url
+    byebug
     expect(response).to have_http_status(204)
   end
 end

@@ -1,0 +1,2 @@
+Fabricator(:resource) do
+end
