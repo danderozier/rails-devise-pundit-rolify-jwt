@@ -1,5 +1,10 @@
 class Api::V1::ApiController < ActionController::API
+  include Pundit
+
   respond_to :json
+
+  # Pundit
+  protect_from_forgery
 
   rescue_from ActiveRecord::RecordInvalid,
               :with => :render_unprocessable_entity_response
