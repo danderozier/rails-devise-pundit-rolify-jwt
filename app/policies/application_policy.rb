@@ -7,7 +7,7 @@ class ApplicationPolicy
   end
 
   def index?
-    false
+    user.has_role? :admin
   end
 
   def show?

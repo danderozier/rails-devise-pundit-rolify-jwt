@@ -1,2 +1,3 @@
 Fabricator(:resource) do
+  
 end

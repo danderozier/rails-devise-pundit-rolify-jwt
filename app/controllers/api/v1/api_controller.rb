@@ -3,15 +3,14 @@ class Api::V1::ApiController < ActionController::API
 
   respond_to :json
 
-  # Pundit
-  protect_from_forgery
-
   rescue_from ActiveRecord::RecordInvalid,
               :with => :render_unprocessable_entity_response
   rescue_from ActiveRecord::RecordNotFound,
               :with => :render_not_found_response
   rescue_from JSON::ParserError,
               :with => :render_bad_request_response
+  rescue_from Pundit::NotAuthorizedError,
+              :with => :render_not_authorized_response
 
   protected
 
@@ -28,6 +27,11 @@ class Api::V1::ApiController < ActionController::API
   def render_bad_request_response(exception)
     render json: { error: exception.message },
            status: :bad_request
+  end
+
+  def render_not_authorized_response(exception)
+    render json: { error: exception.message },
+           status: :forbidden
   end
 
 end
