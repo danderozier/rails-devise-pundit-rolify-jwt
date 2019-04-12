@@ -38,6 +38,8 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'devise', '>= 4.6.0'
 gem 'devise-jwt', '~> 0.5.8'
+gem 'pundit'
+gem 'rolify'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
