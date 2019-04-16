@@ -5,6 +5,6 @@ Fabricator(:user) do
   after_save { |user| user.confirm; }
 end
 
-Fabricator(:admin_user, from: :user) do
-  after_save { |user| user.add_role :admin }
-end
+# Fabricator(:admin_user, from: :user) do
+#   after_save { |user| user.add_role :admin }
+# end

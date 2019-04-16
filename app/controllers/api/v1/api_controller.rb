@@ -1,16 +1,24 @@
+# frozen_string_literal: true
+
 class Api::V1::ApiController < ActionController::API
+  include Authentication
+  include SetCurrentRequestDetails
   include Pundit
 
   respond_to :json
 
   rescue_from ActiveRecord::RecordInvalid,
-              :with => :render_unprocessable_entity_response
+              with: :render_unprocessable_entity_response
   rescue_from ActiveRecord::RecordNotFound,
-              :with => :render_not_found_response
+              with: :render_not_found_response
   rescue_from JSON::ParserError,
-              :with => :render_bad_request_response
+              with: :render_bad_request_response
   rescue_from Pundit::NotAuthorizedError,
-              :with => :render_not_authorized_response
+              with: :render_not_authorized_response
+
+  before_action do
+    self.namespace_for_serializer = Api::V1
+  end
 
   protected
 
@@ -33,5 +41,4 @@ class Api::V1::ApiController < ActionController::API
     render json: { error: exception.message },
            status: :forbidden
   end
-
 end
